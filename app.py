@@ -7,6 +7,11 @@ app = Flask(__name__)
 run_with_ngrok(app)  # Start ngrok when app is run
 
 
+@app.route("/", methods=["GET"])
+def home():
+    return "Welcome to covid Bot"
+
+
 @app.route("/webhook", methods=["POST"])
 def webhook():
     if request.get_json().get("queryResult").get("action") != "covidIntent":
@@ -32,4 +37,4 @@ def webhook():
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host="0.0.0.0", port=5000)
